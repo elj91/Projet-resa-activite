@@ -9,8 +9,7 @@ $animations = $pdo->query("SELECT * FROM ANIMATION")->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Animations</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/scripts.js"></script>
+    <link rel="stylesheet" href="css/styles.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <h2>Liste Des Animations Du Moment</h2>
