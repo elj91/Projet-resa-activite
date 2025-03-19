@@ -1,0 +1,207 @@
+/* Variables de couleurs pour une cohérence visuelle */
+:root {
+  --primary-color: #4A6FFF;
+  --primary-hover: #3457D5;
+  --secondary-color: #FF6B6B;
+  --text-dark: #333333;
+  --text-light: #FFFFFF;
+  --text-gray: #666666;
+  --bg-light: #F8F9FA;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.2);
+  --border-radius: 12px;
+  --transition-speed: 0.3s;
+}
+
+/* Reset et style global */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-attachment: fixed;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Style du titre principal avec effet visuel */
+h2 {
+  text-align: center;
+  color: var(--text-dark);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 2rem 0;
+  padding: 0.5rem 0;
+  position: relative;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* Conteneur responsive avec effet de grille moderne */
+.animations-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+/* Style des cartes d'animation */
+.animation-box {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Effet de survol pour les cartes */
+.animation-box:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Effet d'impulsion lors du clic */
+.animation-box:active {
+  transform: scale(0.98);
+}
+
+/* Style des titres dans les cartes */
+.animation-box h3 {
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 1.5rem 1.5rem 0.5rem;
+  position: relative;
+}
+
+/* Ligne décorative sous les titres des cartes */
+.animation-box h3::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--primary-color);
+  margin-top: 0.5rem;
+  border-radius: 1.5px;
+}
+
+/* Style du texte descriptif */
+.animation-box p {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  padding: 0.5rem 1.5rem 1rem;
+  flex-grow: 1;
+  margin: 0;
+}
+
+/* Style du bouton */
+.animation-box button {
+  background: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+  margin: 0 1.5rem 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Effet de survol pour les boutons */
+.animation-box button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+/* Effet au clic sur les boutons */
+.animation-box button:active {
+  transform: translateY(0);
+}
+
+/* Ajout d'une icône "flèche" après le texte du bouton */
+.animation-box button::after {
+  content: '→';
+  display: inline-block;
+  margin-left: 0.5rem;
+  transition: transform var(--transition-speed) ease;
+}
+
+.animation-box button:hover::after {
+  transform: translateX(4px);
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+  .animations-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 0 1rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .animations-container {
+    grid-template-columns: 1fr;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  .animation-box h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Animation pour les cartes lors du chargement */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Applique l'animation aux cartes avec un délai différent pour chaque élément */
+.animation-box {
+  animation: fadeInUp 0.6s ease backwards;
+}
+
+.animation-box:nth-child(1) { animation-delay: 0.1s; }
+.animation-box:nth-child(2) { animation-delay: 0.2s; }
+.animation-box:nth-child(3) { animation-delay: 0.3s; }
+.animation-box:nth-child(4) { animation-delay: 0.4s; }
+.animation-box:nth-child(5) { animation-delay: 0.5s; }
+.animation-box:nth-child(6) { animation-delay: 0.6s; }
+.animation-box:nth-child(7) { animation-delay: 0.7s; }
+.animation-box:nth-child(8) { animation-delay: 0.8s; }
