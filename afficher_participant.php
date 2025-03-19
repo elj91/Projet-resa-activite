@@ -52,168 +52,53 @@ foreach ($results as $row) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Afficher les Participants</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f8fa;
-        }
-
-        header {
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .activity-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-        }
-
-        .activity-header {
-            background-color: #007bff;
-            color: white;
-            padding: 15px;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .activity-content {
-            padding: 20px;
-        }
-
-        .activity-content p {
-            margin: 10px 0;
-            font-size: 16px;
-            color: #333;
-        }
-
-        h3 {
-            color: #007bff;
-            font-size: 1.1em;
-            margin-bottom: 15px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table th, table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        table th {
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-        }
-
-        table td {
-            font-size: 15px;
-            color: #333;
-        }
-
-        table tbody tr:hover {
-            background-color: #f7f8fa;
-        }
-
-        .no-participants {
-            font-style: italic;
-            color: #888;
-            margin-top: 20px;
-        }
-
-        form {
-            display: inline-block;
-        }
-
-        button {
-            background-color: #e74c3c; /* Rouge plus doux */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            display: inline-block;
-            text-align: center;
-        }
-
-        button:hover {
-            background-color: #c0392b; /* Rouge plus foncé pour le survol */
-            transform: scale(1.05); /* Légère augmentation de taille au survol */
-        }
-
-        button:focus {
-            outline: none;
-        }
-
-        button:active {
-            background-color: #bd2d28; /* Couleur active plus foncée */
-            transform: scale(1); /* Réinitialise la taille après le clic */
-        }
-
-        button {
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités et Participants</title>
+    <link rel="stylesheet" href="css/participe.css">
 </head>
 <body>
-    <header>
-        <h1>Activités et Participants</h1>
-    </header>
+    <!-- Titre principal - Changement important: suppression de la balise header -->
+    <h1>Activités et Participants</h1>
+    
     <main>
         <!-- Affichage du message de succès ou d'erreur -->
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-            <div style="background-color: #28a745; color: white; padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 20px;">
-                Le participant a été supprimé avec succès.
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> Le participant a été supprimé avec succès.
             </div>
         <?php elseif (isset($_GET['error']) && $_GET['error'] == 1): ?>
-            <div style="background-color: #dc3545; color: white; padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 20px;">
-                Une erreur est survenue lors de la suppression du participant.
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du participant.
             </div>
         <?php endif; ?>
 
         <?php foreach ($activites as $key => $activite): ?>
             <div class="activity-card">
                 <div class="activity-header">
-                    Activité : <?= htmlspecialchars($activite['CODEANIM']) ?> 
-                    (<?= htmlspecialchars($activite['DATEACT']) ?>)
+                    <span>Activité : <?= htmlspecialchars($activite['CODEANIM']) ?> 
+                    (<?= htmlspecialchars($activite['DATEACT']) ?>)</span>
+                    <span class="participants-badge">
+                        <i class="fas fa-users"></i> 
+                        <?= count($activite['PARTICIPANTS']) ?> participant(s)
+                    </span>
                 </div>
                 <div class="activity-content">
-                    <p><strong>Responsable :</strong> <?= htmlspecialchars($activite['NOMRESP']) ?> <?= htmlspecialchars($activite['PRENOMRESP']) ?></p>
-                    <p><strong>Prix :</strong> <?= htmlspecialchars($activite['PRIXACT']) ?> €</p>
+                    <div class="activity-info">
+                        <div class="info-item">
+                            <p><strong><i class="fas fa-user-tie"></i> Responsable :</strong> <?= htmlspecialchars($activite['NOMRESP']) ?> <?= htmlspecialchars($activite['PRENOMRESP']) ?></p>
+                        </div>
+                        <div class="info-item">
+                            <p><strong><i class="fas fa-tag"></i> Prix :</strong> <?= htmlspecialchars($activite['PRIXACT']) ?> €</p>
+                        </div>
+                    </div>
                     
-                    <h3>Participants :</h3>
+                    <h3><i class="fas fa-list"></i> Liste des participants</h3>
                     <?php if (!empty($activite['PARTICIPANTS'])): ?>
                         <table>
                             <thead>
                                 <tr>
                                     <th>Utilisateur</th>
-                                    <th>Date d'Inscription</th>
+                                    <th>Date d'inscription</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -228,7 +113,9 @@ foreach ($results as $row) {
                                                 <input type="hidden" name="user" value="<?= htmlspecialchars($participant['USER']) ?>">
                                                 <input type="hidden" name="codeanim" value="<?= htmlspecialchars($activite['CODEANIM']) ?>">
                                                 <input type="hidden" name="dateact" value="<?= htmlspecialchars($activite['DATEACT']) ?>">
-                                                <button type="submit">Supprimer</button>
+                                                <button type="submit">
+                                                    <i class="fas fa-trash-alt"></i> Supprimer
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -236,11 +123,15 @@ foreach ($results as $row) {
                             </tbody>
                         </table>
                     <?php else: ?>
-                        <p class="no-participants">Aucun participant inscrit pour cette activité.</p>
+                        <p class="no-participants">
+                            <i class="fas fa-info-circle"></i> Aucun participant inscrit pour cette activité.
+                        </p>
                     <?php endif; ?>
                 </div>
             </div>
         <?php endforeach; ?>
     </main>
+
+    <?php include 'footer.php'; ?>
 </body>
 </html>
