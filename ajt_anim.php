@@ -45,55 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajouter_animation']))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar Gestion</title>
-    <style>
-        /* Global styles for the navbar */
-        .navbar {
-            background-color: #333; /* Dark background */
-            color: #fff; /* White text */
-            padding: 1rem 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .navbar-title {
-            font-size: 1.5rem;
-            margin: 0;
-            color: #f0f0f0;
-        }
-
-        .navbar-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .nav-button {
-            text-decoration: none;
-            color: #fff;
-            background-color: #555;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            font-size: 1rem;
-        }
-
-        .nav-button:hover {
-            background-color: #777;
-            transform: scale(1.05);
-        }
-
-        .logout-button {
-            background-color: #e63946; /* Red for logout */
-        }
-
-        .logout-button:hover {
-            background-color: #d62828;
-        }
-    </style>
+    <link rel="stylesheet" href="css/gestion.css">
 </head>
 <body>
     <header class="navbar">
